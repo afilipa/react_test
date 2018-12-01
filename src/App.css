@@ -18,6 +18,16 @@
   font-size: large;
 }
 
+.intro-hidden{
+  display: none;
+}
+.line{
+  width: 50%;
+  align-content: right;
+  text-align: justify;
+  margin: auto;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
