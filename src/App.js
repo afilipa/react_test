@@ -7,13 +7,12 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { user: {login:"afilipa"}, class: "App-intro" }
-    
+    this.state = { user: { login: "afilipa" }, class: "App-intro" }
+
   }
 
   getUserInformation() {
     fetch(`https://api.github.com/users/${this.state.user.login}`).then(results => { return results.json(); }).then(data => { console.log(data); this.setState({ user: data, class: "intro-hidden" }) });
-
   }
 
   render() {

@@ -32,7 +32,7 @@ class RepositoriesInfo extends React.Component {
       <div className="line">
         <ul>
           {this.state.repos.map(item => (
-            <li key={item.id}>{item.name}</li>
+            <li key={item.id}>{item.name}   <div className="description">  &#10140; {(item.description)? item.description: '\u26A0 (Ooops! Someone forgot the repo description ...)'  }</div></li>
           ))}
         </ul>
       </div>
