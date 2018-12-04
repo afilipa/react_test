@@ -7,12 +7,22 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { user: { login: "afilipa" }, class: "App-intro" }
+    this.state={ user: { login: "afilipa" }, class: "App-intro" }
 
   }
 
   getUserInformation() {
     fetch(`https://api.github.com/users/${this.state.user.login}`).then(results => { return results.json(); }).then(data => { console.log(data); this.setState({ user: data, class: "intro-hidden" }) });
+  }
+
+  handleChange(event) {
+    /* new login  */
+    this.setState({ user: {login:event.target.value }})
+  }
+
+  handleSubmit(event){
+    this.getUserInformation();
+    event.preventDefault();
   }
 
   render() {
@@ -27,10 +37,15 @@ class App extends Component {
         </p>
         <div className={this.state.class}>
           <hr />
-          <p>Click on the button to fetch the user information</p>
-          <button onClick={this.getUserInformation.bind(this)}>
-            Click me
-          </button>
+
+          <form onSubmit={this.handleSubmit.bind(this)} >
+            <p>Insert the Lovely Username you are looking for <br/>and get some information about his/her github  </p>
+            <label> Username: </label>
+            <input type="text" name="name" value={this.state.user.login} onChange={this.handleChange.bind(this)} />
+            <input type="submit" value="Submit" />
+          </form>
+          
+
         </div>
         <UserInformation login={this.state.user.login} name={this.state.user.name} />
       </div>

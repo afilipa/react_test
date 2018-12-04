@@ -2,9 +2,9 @@ import React from 'react';
 
 
 const UserInformation = props => (!props.name) ? (
-  <div>
-    You will see user information here
-  </div>
+  <p>
+    (You will see user information here)
+  </p>
 ) : (<div>
   <h1>Here is your Lovely user's info</h1><br />
   <div className="line">Name: {props.name}</div>
@@ -16,13 +16,16 @@ class RepositoriesInfo extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { user: this.props.user, repos: [] };
+    this.state = { repos: [] };
+  }
+
+  componentDidMount() {
     this.getReposInformation();
   }
 
   getReposInformation() {
 
-    fetch(`https://api.github.com/users/${this.state.user}/repos`).then(results => { return results.json(); }).then(data => {
+    fetch(`https://api.github.com/users/${this.props.user}/repos`).then(results => { return results.json(); }).then(data => {
       this.setState({ repos: data })
     });
 
