@@ -12,8 +12,17 @@ class App extends Component {
   }
 
   getUserInformation() {
-    fetch(`https://api.github.com/users/${this.state.user.login}`).then(results => { return results.json(); }).then(data => { console.log(data); this.setState({ user: data, class: "intro-hidden" }) });
-  }
+    fetch(`https://api.github.com/users/${this.state.user.login}`)
+    .then(results => { return results.json(); })
+    .then(data => { 
+      if(!data.message){
+        console.log(data); 
+        this.setState({ user: data, class: "intro-hidden"})
+      } else{
+        this.setState({ message:"\u26A0 Error: "+data.message, class: "intro-hidden", hideCSS:true })
+      }
+  })
+}
 
   handleChange(event) {
     /* new login  */
@@ -47,7 +56,8 @@ class App extends Component {
           
 
         </div>
-        <UserInformation login={this.state.user.login} name={this.state.user.name} />
+        <div className='line description'>{this.state.message}</div>
+        <UserInformation login={this.state.user.login} name={this.state.user.name} hide={this.state.hideCSS}/>
       </div>
     );
   }

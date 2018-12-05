@@ -1,8 +1,11 @@
 import React from 'react';
 
 
-const UserInformation = props => { console.log(props)
-  if (!props.name) {
+const UserInformation = props => { 
+
+  if(props.hide) return <div></div>;
+
+  if (props.name===undefined) {
     return (props.login!="" && !props.login) ?
       (<p>
         Oh no! The given user doesn't have github account &#9785;
@@ -14,7 +17,7 @@ const UserInformation = props => { console.log(props)
   } else {
     return (<div>
       <h1>Here is your Lovely user's info</h1><br />
-      <div className="line">Name: {props.name}</div>
+      <div className="line">Name: {(props.name)?props.name:'<Anonymous>'}</div>
       <div className="line">Repos:</div>
       {<RepositoriesInfo user={props.login} />}
     </div>)
@@ -44,7 +47,11 @@ class RepositoriesInfo extends React.Component {
       <div className="line">
         <ul>
           {this.state.repos.map(item => (
-            <li key={item.id}>{item.name}   <div className="description">  &#10140; {(item.description) ? item.description : '\u26A0 (Ooops! Someone forgot the repo description ...)'}</div></li>
+            <li key={item.id}>{item.name}   
+              <div className="description">  
+                &#10140; {(item.description) ? item.description : '\u26A0 (Ooops! Someone forgot the repo description ...)'}
+              </div>
+              </li>
           ))}
         </ul>
       </div>

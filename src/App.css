@@ -29,6 +29,7 @@
 }
 .description{
   display: inline-block;
+  overflow-wrap: break-word;
 }
 
 @keyframes App-logo-spin {
